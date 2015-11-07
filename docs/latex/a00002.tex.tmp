@@ -1,0 +1,14 @@
+\hypertarget{a00002}{}\section{/home/kevin/\+Desktop/\+Projects/\+C++/\+Cockatoo\+Engine/include/cocmath.h File Reference}
+\label{a00002}\index{/home/kevin/\+Desktop/\+Projects/\+C++/\+Cockatoo\+Engine/include/cocmath.\+h@{/home/kevin/\+Desktop/\+Projects/\+C++/\+Cockatoo\+Engine/include/cocmath.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{a00003}{coc}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{a00003_a3cae2e9afa5646630addb5e7869b6924}{coc\+::add\+Stuff} (int x, int y)
+\end{DoxyCompactItemize}
