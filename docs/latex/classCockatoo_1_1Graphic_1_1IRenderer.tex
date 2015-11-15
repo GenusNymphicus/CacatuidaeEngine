@@ -1,0 +1,69 @@
+\hypertarget{classCockatoo_1_1Graphic_1_1IRenderer}{}\section{Cockatoo\+:\+:Graphic\+:\+:I\+Renderer Class Reference}
+\label{classCockatoo_1_1Graphic_1_1IRenderer}\index{Cockatoo\+::\+Graphic\+::\+I\+Renderer@{Cockatoo\+::\+Graphic\+::\+I\+Renderer}}
+
+
+Interface for the renderer-\/implementations Provides an interface for the various renderer-\/implementations.  
+
+
+
+
+{\ttfamily \#include $<$I\+Renderer.\+h$>$}
+
+
+
+Inheritance diagram for Cockatoo\+:\+:Graphic\+:\+:I\+Renderer\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \hyperlink{classCockatoo_1_1Graphic_1_1IRenderer_a838c249862cf6189adb9304302348a1f}{initialize} ()=0
+\begin{DoxyCompactList}\small\item\em Initialization of the graphics-\/library. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{classCockatoo_1_1Graphic_1_1IRenderer_a255ff11545b8e2056a0bc493b9a37bcc}{get\+Error\+Message} (int error\+Code)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface for the renderer-\/implementations Provides an interface for the various renderer-\/implementations. 
+
+A Renderer is the interface between the Graphics\+Libraries(Open\+GL, DirectX, ..) and the outside. Ideally, no other file will contains the graphicslibrary-\/specific code, except for the renderer-\/implementations. 
+
+\subsection{Member Function Documentation}
+\index{Cockatoo\+::\+Graphic\+::\+I\+Renderer@{Cockatoo\+::\+Graphic\+::\+I\+Renderer}!get\+Error\+Message@{get\+Error\+Message}}
+\index{get\+Error\+Message@{get\+Error\+Message}!Cockatoo\+::\+Graphic\+::\+I\+Renderer@{Cockatoo\+::\+Graphic\+::\+I\+Renderer}}
+\subsubsection[{get\+Error\+Message(int error\+Code)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string Cockatoo\+::\+Graphic\+::\+I\+Renderer\+::get\+Error\+Message (
+\begin{DoxyParamCaption}
+\item[{int}]{error\+Code}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classCockatoo_1_1Graphic_1_1IRenderer_a255ff11545b8e2056a0bc493b9a37bcc}{}\label{classCockatoo_1_1Graphic_1_1IRenderer_a255ff11545b8e2056a0bc493b9a37bcc}
+
+
+Implemented in \hyperlink{classCockatoo_1_1Graphic_1_1OGLRenderer_ac86dbad008fdc042b36fbdb5ed5cede2}{Cockatoo\+::\+Graphic\+::\+O\+G\+L\+Renderer}.
+
+\index{Cockatoo\+::\+Graphic\+::\+I\+Renderer@{Cockatoo\+::\+Graphic\+::\+I\+Renderer}!initialize@{initialize}}
+\index{initialize@{initialize}!Cockatoo\+::\+Graphic\+::\+I\+Renderer@{Cockatoo\+::\+Graphic\+::\+I\+Renderer}}
+\subsubsection[{initialize()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual int Cockatoo\+::\+Graphic\+::\+I\+Renderer\+::initialize (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classCockatoo_1_1Graphic_1_1IRenderer_a838c249862cf6189adb9304302348a1f}{}\label{classCockatoo_1_1Graphic_1_1IRenderer_a838c249862cf6189adb9304302348a1f}
+
+
+Initialization of the graphics-\/library. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Error\+Message} & \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+0 for success or an error code 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classCockatoo_1_1Graphic_1_1OGLRenderer_a180a5fe41fa5024a70e7f55492801aad}{Cockatoo\+::\+Graphic\+::\+O\+G\+L\+Renderer}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/kevin/\+Desktop/\+Projects/\+C++/\+Cockatoo\+Engine/include/\+Graphic/\hyperlink{IRenderer_8h}{I\+Renderer.\+h}\end{DoxyCompactItemize}

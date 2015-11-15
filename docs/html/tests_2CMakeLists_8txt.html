@@ -38,9 +38,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -91,13 +91,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a8b46990c851aadb24b3810629d8813ce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tests_2CMakeLists_8txt.html#a8b46990c851aadb24b3810629d8813ce">if</a> (RUN_TESTS) set(HEADER_FILES $</td></tr>
-<tr class="separator:a8b46990c851aadb24b3810629d8813ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a66881eab1b125fddf66c44775d227ab6"><td class="memItemLeft" align="right" valign="top">PARENT_SCOPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tests_2CMakeLists_8txt.html#a66881eab1b125fddf66c44775d227ab6">Message</a> (STATUS&quot;HEADER FILES: &quot;${HEADER_FILES}) include_directories(gtest_main $</td></tr>
-<tr class="separator:a66881eab1b125fddf66c44775d227ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1880620c2ae188578848c38d753781d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tests_2CMakeLists_8txt.html#a1880620c2ae188578848c38d753781d5">if</a> (RUN_TESTS) <a class="el" href="src_2CMakeLists_8txt.html#aef44ccb0eab603dab3a3a92d58808b08">add_subdirectory</a>(Graphic) set(HEADER_FILES $</td></tr>
+<tr class="separator:a1880620c2ae188578848c38d753781d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a255763ea4d9593d9275be1fbee2bc377"><td class="memItemLeft" align="right" valign="top">PARENT_SCOPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tests_2CMakeLists_8txt.html#a255763ea4d9593d9275be1fbee2bc377">include_directories</a> (gtest_main ${TEST_HEADER}${HEADER_FILES}) add_executable(runUnitTests $</td></tr>
+<tr class="separator:a255763ea4d9593d9275be1fbee2bc377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46d1cce60abf111917f1d6ab621d7f99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tests_2CMakeLists_8txt.html#a46d1cce60abf111917f1d6ab621d7f99">target_link_libraries</a> (runUnitTests gtest gtest_main) add_test(runUnitTests runUnitTests) add_library(TestLib $</td></tr>
+<tr class="separator:a46d1cce60abf111917f1d6ab621d7f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a8b46990c851aadb24b3810629d8813ce"></a>
+<a class="anchor" id="a1880620c2ae188578848c38d753781d5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -113,15 +115,31 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a66881eab1b125fddf66c44775d227ab6"></a>
+<a class="anchor" id="a255763ea4d9593d9275be1fbee2bc377"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">PARENT_SCOPE Message </td>
+          <td class="memname">PARENT_SCOPE include_directories </td>
           <td>(</td>
-          <td class="paramtype">STATUS&quot;HEADER FILES: &quot;${HEADER_FILES}&#160;</td>
+          <td class="paramtype">gtest_main ${TEST_HEADER}${HEADER_FILES}&#160;</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a46d1cce60abf111917f1d6ab621d7f99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">target_link_libraries </td>
+          <td>(</td>
+          <td class="paramtype">runUnitTests gtest&#160;</td>
+          <td class="paramname"><em>gtest_main</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

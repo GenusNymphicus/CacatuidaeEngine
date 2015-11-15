@@ -1,6 +1,6 @@
 #Cockatoo/
 cmake_minimum_required(VERSION 2.8.11)
-project(Cockatoo)
+project(Cacatuidae)
 
 SET(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall ")
 SET(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS} -Wall")
@@ -12,7 +12,11 @@ FIND_PACKAGE(OpenAL REQUIRED)
 
 set(TEST_HEADER)
 
-set(HEADER_FILES ${HEADER_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/include )  
+set(HEADER_FILES ${HEADER_FILES} 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/external/glm
+    )  
 set(LIBRARIES ${LIBRARIES}  ${OPENGL_glu_LIBRARY} ${OPENGL_gl_LIBRARY} pthread asound rt)
 
 add_subdirectory(external)

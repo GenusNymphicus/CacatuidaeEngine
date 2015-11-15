@@ -1,3 +1,4 @@
 set(TEST_SOURCES ${TEST_SOURCES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/RenderEngine_Test.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/Renderer_Test.cpp
 PARENT_SCOPE)

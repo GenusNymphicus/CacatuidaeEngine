@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cmake_5fminimum_5frequired',['cmake_minimum_required',['../CMakeLists_8txt.html#a5f91e09b90772f6a3e58ca75af4db568',1,'CMakeLists.txt']]]
+  ['geterrormessage',['getErrorMessage',['../classCockatoo_1_1Graphic_1_1IRenderer.html#a255ff11545b8e2056a0bc493b9a37bcc',1,'Cockatoo::Graphic::IRenderer::getErrorMessage()'],['../classCockatoo_1_1Graphic_1_1OGLRenderer.html#ac86dbad008fdc042b36fbdb5ed5cede2',1,'Cockatoo::Graphic::OGLRenderer::getErrorMessage()']]]
 ];

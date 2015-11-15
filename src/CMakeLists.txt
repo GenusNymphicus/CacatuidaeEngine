@@ -1,4 +1,7 @@
 #Cockatoo/src/
+
+
+add_subdirectory(Graphic)
+
 set(SOURCE_FILES ${SOURCE_FILES}
-   ${CMAKE_CURRENT_SOURCE_DIR}/math.cpp
 PARENT_SCOPE)
