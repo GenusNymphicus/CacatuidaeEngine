@@ -1,8 +1,12 @@
 #ifndef CACATUIDAE_GRAPHICS_RENDER_ENGINE_H
 #define CACATUIDAE_GRAPHICS_RENDER_ENGINE_H
 
+#include <map>
+
 #include "IWindow.h"
 #include "Renderable.h"
+#include "RenderTechnique.h"
+#include "TextureResource.h"
 
 namespace cac 
 {
@@ -13,13 +17,15 @@ namespace cac
 	
 	void clearScreen();
 	void updateScreen();
-	
 	//texture, position, size, rotation, technique related informations  / rendertechnique
-	void render2D(Renderable renderable, std::string program);
-	//void loadResource(IResource resource);
-	
+	void render(Renderable renderable, RenderTechnique renderTechnique);
+	bool loadTexture(TextureResource resource);
+
+	void unloadTexture(std::string name);
+
     private:
 	Renderer renderer;
+	std::map<std::string, TextureResource> textureResources;
     };
 }
 

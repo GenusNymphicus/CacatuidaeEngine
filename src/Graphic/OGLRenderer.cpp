@@ -6,7 +6,7 @@
 #include "Graphic/IWindow.h"
 #include "Graphic/Camera.h"
 
-
+#include <fstream>
 cac::OGLRenderer::~OGLRenderer()
 {
     unloadResources();
@@ -142,6 +142,7 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
      
     GLenum error = glGetError();
 	
+    textures[textureName] = OGLTexture();
     glGenTextures(1, &textures[textureName].textureId);
 
     glBindTexture(GL_TEXTURE_2D, textures[textureName].textureId);
@@ -165,6 +166,9 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
     textures[textureName].height = height;
     
     error = glGetError();
+    
+  
+    
     return error == GL_NO_ERROR;
     
  }
@@ -226,12 +230,12 @@ void cac::OGLRenderer::render(const Renderable& renderable)
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4, &color[0], GL_DYNAMIC_DRAW);
 
     
-    float texRect[] = { renderable.texRectX, renderable.texRectY , renderable.texRectWidth , renderable.texRectHeight };
+    float texRect[] = { renderable.texRectX, renderable.texRectY, renderable.texRectWidth , renderable.texRectHeight };
     
     glBindBuffer(GL_ARRAY_BUFFER, meshes[renderable.mesh].texRectangle);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4, &texRect[0], GL_DYNAMIC_DRAW);
 
-    glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 3, 1);
+    glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, meshes[renderable.mesh].numberOfIndices, 1);
     error = glGetError();
     glBindVertexArray(0);
 }
