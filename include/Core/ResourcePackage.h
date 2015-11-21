@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Graphic/TextureResource.h"
+#include "Graphic/FontResource.h"
 
 namespace cac 
 {
@@ -10,6 +11,7 @@ namespace cac
     {
 	std::string name;
 	std::vector<TextureResource> textures;
+	std::vector<FontResource> fonts;
     };
 }
 #endif

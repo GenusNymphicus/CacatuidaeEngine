@@ -32,9 +32,10 @@ namespace cac
 	virtual void updateContext(WindowDesc windowDesc) override;
 	
 	virtual std::string getErrorMessage(int errorCode);
-	virtual bool createMesh(std::string name, std::vector<Vertex> vertices, std::vector<unsigned int> indices = std::vector<unsigned int>());
+	virtual bool createMesh(std::string name, std::vector<Vertex> vertices, std::vector<short> indices = std::vector<short>());
 	virtual bool createShaderProgram(std::string programName, std::string vertexShader, std::string fragmentShader, std::string geometryShader =""); 
 	virtual bool createTexture(std::string textureName, int width, int height, std::vector<char> data,  bool hasAlpha = false);
+	virtual bool createTexture(std::string textureName, int width, int height, std::vector<char> data,  int numChannels);
 	virtual void swapBuffers(); 
 	virtual void setClearColor(float r, float g, float b);
 	virtual void clearBuffers();

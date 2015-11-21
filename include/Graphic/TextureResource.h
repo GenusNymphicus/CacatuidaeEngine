@@ -10,6 +10,7 @@ namespace cac
 	int width;
 	int height;
 	bool hasAlpha;
+	std::vector<char> data;
     };
 }
 #endif

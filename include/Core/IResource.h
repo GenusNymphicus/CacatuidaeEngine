@@ -7,7 +7,6 @@ namespace cac
     struct IResource 
     {
 	std::string name;
-	std::vector<char> data;
     };
 }
 #endif

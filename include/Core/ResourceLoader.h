@@ -5,6 +5,7 @@
 #include <map>
 #include "Core/ResourcePackage.h"
 #include "Graphic/TextureResource.h"
+#include "Graphic/FontResource.h"
 
 namespace cac 
 {
@@ -15,7 +16,7 @@ namespace cac
 	void unloadPackage(std::string packageName);
 	
     private:
-	void loadFonts(std::ifstream& packageFile);
+	std::vector<FontResource> loadFonts(std::ifstream& packageFile);
 	std::vector<TextureResource> loadTextures(std::ifstream& packageFile);
 	void loadShaders(std::ifstream& packageFile);
 	void loadAudio(std::ifstream& packageFile);

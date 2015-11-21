@@ -53,6 +53,7 @@ int cac::OGLRenderer::initialize(WindowDesc windowDesc)
 
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
+    
     return GL_NO_ERROR;
 }
 
@@ -69,7 +70,7 @@ bool cac::OGLRenderer::createShaderProgram(std::string programName, std::string 
     return shaderManager.createProgram(programName, vertexShader, fragmentShader, geometryShader);
 }
 
-bool cac::OGLRenderer::createMesh(std::string name, std::vector<Vertex> vertices, std::vector<unsigned int> indices)
+bool cac::OGLRenderer::createMesh(std::string name, std::vector<Vertex> vertices, std::vector<short> indices)
 {
     GLenum error = glGetError();
     if(meshes[name].vao != 0)
@@ -131,8 +132,12 @@ bool cac::OGLRenderer::createMesh(std::string name, std::vector<Vertex> vertices
     error = glGetError();
     return error == GL_NO_ERROR;
 }
-
 bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<char> data, bool hasAlpha)
+{
+    createTexture(textureName, width, height, data, (hasAlpha ? 4 : 3));
+    
+}
+bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<char> data, int numChannels)
  {
      if(textures[textureName].textureId != 0)
      {
@@ -152,16 +157,21 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
-    GLint internalFormat = GL_RGB;
+    GLint internalFormat;
+    switch (numChannels)
+    {
+	case 1: { internalFormat = GL_RED; break; }
+	case 3: { internalFormat = GL_RGB; break; }
+	case 4: { internalFormat = GL_RGBA; break; }
+	default: { internalFormat = GL_RGB; }
+    }
     
-    if(hasAlpha)
-	internalFormat = GL_RGBA;
 
     glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, internalFormat, GL_UNSIGNED_BYTE, &data[0]);
     glBindTexture(GL_TEXTURE_2D, 0);
     
 
-    textures[textureName].hasAlpha = hasAlpha;
+    textures[textureName].hasAlpha = (numChannels == 4);
     textures[textureName].width = width;
     textures[textureName].height = height;
     
@@ -170,7 +180,6 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
   
     
     return error == GL_NO_ERROR;
-    
  }
    
 void cac::OGLRenderer::bindTexture(std::string texture)

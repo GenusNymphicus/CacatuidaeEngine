@@ -11,7 +11,7 @@ cac::ResourcePackage cac::ResourceLoader::loadPackage(std::string packageName)
     
     if(packageFile.good())
     {
-	loadFonts(packageFile);
+	package.fonts = loadFonts(packageFile);
 	package.textures = loadTextures(packageFile);
     }
     return package;
@@ -39,45 +39,46 @@ void cac::ResourceLoader::loadAudio(std::ifstream& packageFile)
    
 }
 
-void cac::ResourceLoader::loadFonts(std::ifstream& packageFile)
+std::vector<cac::FontResource> cac::ResourceLoader::loadFonts(std::ifstream& packageFile)
 {
  unsigned char buffer[256];
     
     //first byte number of fonts
     uint32_t numberOfFonts = readBytesToUInt32(packageFile, 1);
-    
+    std::vector<cac::FontResource> fonts(numberOfFonts);
     for(unsigned int i = 0; i<numberOfFonts; i++)
     {
-	//one byte fontname length
+	//1 byte fontname length
 	uint32_t fontNameLength = readBytesToUInt32(packageFile, 1);
 	
 	//n byte font name
 	packageFile.read((char*)buffer, fontNameLength);
-	std::string fontname((char*)buffer, fontNameLength);
-	
+	std::string fontName((char*)buffer, fontNameLength);
+	fonts[i].name = fontName;
 	//1 byte font size
 	uint32_t fontSize = (uint32_t)readBytesToUInt32(packageFile, 1);
+	fonts[i].fontSize = fontSize;
 	
 	//2 byte font texture height
 	uint32_t textureHeight = readBytesToUInt32(packageFile, 2);
+	fonts[i].textureHeight = textureHeight;
 	
 	//2 byte font texture width
-	uint32_t textureWidth = readBytesToUInt32(packageFile, 1);
+	uint32_t textureWidth = readBytesToUInt32(packageFile, 2);
+	fonts[i].textureWidth = textureWidth;
 	
 	//4 byte fonttexture data count 
-	uint32_t textureDataCount = readBytesToUInt32(packageFile, 4);;
+	uint32_t textureDataCount = readBytesToUInt32(packageFile, 4);
 			
 	//nbyte font texture data
-	std::vector<char> textureData(textureDataCount);
-	packageFile.read((char*) &textureData[0], textureDataCount);
-	//font.data = textureData;
-		
+	fonts[i].data.resize(textureDataCount);
+	packageFile.read((char*) &fonts[i].data[0], textureDataCount);
+
 	
 	//2 byte for the number of glyphes 
 	uint32_t glyphCount = readBytesToUInt32(packageFile, 2); 
 	
-
-	for(unsigned int i = 0; i<glyphCount; ++i)
+	for(unsigned int g = 0; g<glyphCount; ++g)
 	{
 	    char glyphCharacter;
 	    
@@ -93,17 +94,16 @@ void cac::ResourceLoader::loadFonts(std::ifstream& packageFile)
 		glyphInformation[j] = glyphValue;	
 	    }
 	    
-    // 	font.glyphs[glyphCharacter].advanceX = glyphInformation[0];
-    // 	font.glyphs[glyphCharacter].advanceY = glyphInformation[1];
-    // 	font.glyphs[glyphCharacter].bitmapWidth = glyphInformation[2];
-    // 	font.glyphs[glyphCharacter].bitmapHeight = glyphInformation[3];
-    // 	font.glyphs[glyphCharacter].bitmapLeft = glyphInformation[4];
-    // 	font.glyphs[glyphCharacter].bitmapTop = glyphInformation[5];
-    // 	font.glyphs[glyphCharacter].textureX= glyphInformation[6];
-		
-
+	    fonts[i].glyphs[glyphCharacter].advanceX = glyphInformation[0];
+	    fonts[i].glyphs[glyphCharacter].advanceY = glyphInformation[1];
+	    fonts[i].glyphs[glyphCharacter].bitmapWidth = glyphInformation[2];
+	    fonts[i].glyphs[glyphCharacter].bitmapHeight = glyphInformation[3];
+	    fonts[i].glyphs[glyphCharacter].bitmapLeft = glyphInformation[4];
+	    fonts[i].glyphs[glyphCharacter].bitmapTop = glyphInformation[5];
+	    fonts[i].glyphs[glyphCharacter].textureX = glyphInformation[6];
 	}
     }
+    return fonts;
 }
 
 void cac::ResourceLoader::loadShaders(std::ifstream& packageFile)
@@ -149,9 +149,8 @@ std::vector<cac::TextureResource> cac::ResourceLoader::loadTextures(std::ifstrea
 	uint32_t textureDataCount =  readBytesToUInt32(packageFile, 4); 
 	
 	
-	std::vector<char> data(textureDataCount);
-	packageFile.read((char*) &data[0], textureDataCount);
-	textures[i].data = data;
+	textures[i].data.resize(textureDataCount);
+	packageFile.read((char*) &textures[i].data[0], textureDataCount);
 	
 
     }
