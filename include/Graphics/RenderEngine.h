@@ -42,6 +42,10 @@ namespace cac
 	void setCamera(Camera& camera);
 	
 	void unloadTexture(std::string name);
+	
+	IWindow* getWindow();
+	
+	
     private:
 	Renderer renderer;
 	std::map<std::string, MeshResource> meshResources;

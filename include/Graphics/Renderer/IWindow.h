@@ -58,6 +58,20 @@ namespace cac
 	     * @return true for success or false for failure
 	     */
 	    virtual bool initialize(WindowDesc description) = 0;
+	    
+	    
+	    /** Returns if the Window should be closed
+	     * 
+	     * The context listens to OS-specific calls to close the window.
+	     * If the "close" button on the wiundow is pressed, this method will
+	     * return true. Otherwise false.
+	     *
+	     * @return true if the window should close, false if not 
+	     */
+	    virtual bool shouldClose() = 0;
+	    
+	    
+	    virtual void swapBuffers() = 0;
 	protected:
 	    WindowDesc description;
 	};

@@ -1,0 +1,6 @@
+#Cockatoo/src/Utility
+set(SOURCE_FILES ${SOURCE_FILES}
+   ${CMAKE_CURRENT_SOURCE_DIR}/Time.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/FPSCounter.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/Profiler.cpp
+PARENT_SCOPE)

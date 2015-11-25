@@ -4,16 +4,12 @@
 #include <memory>
 #include <vector>
 
-//#include "IGameScene.h"
+#include "IGameScene.h"
 #include "Graphics/RenderEngine.h"
 #include "Graphics/Renderer/OGLRenderer.h"
 
 namespace cac
 {
-
-    class IGameScene {};
-    class GameObject;
-    
     class GameEngine
     {
     public:
@@ -22,7 +18,7 @@ namespace cac
         //run the game. The parameter is the first gameScene that should run.
         void run(IGameScene* initialScene, WindowDesc windowDesc, bool isMainloop = true);
 	
-	void update();
+	void update(float dt);
         
 	//exit the whole game
         void exit();
@@ -30,16 +26,15 @@ namespace cac
 // 	void pushScene(IGameScene* scene);
 // 	void popScene();
 	
+	RenderEngine<OGLRenderer>* getRenderEngine();
     private:
 	bool initializeRenderEngine(cac::WindowDesc windowDesc);
 	
 	
 	RenderEngine<OGLRenderer> renderEngine;
-	
-	
+		
         bool isRunning;
-   //     std::vector<std::unique_ptr<IGameScene>> gameScenes;
-	bool pop;
+        std::vector<std::unique_ptr<IGameScene>> gameScenes;
     };
 }
 

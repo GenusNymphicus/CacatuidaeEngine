@@ -33,6 +33,8 @@ namespace cac
 	     */
 	    virtual bool create(WindowDesc description);
 	    virtual bool initialize(WindowDesc description);
+	    virtual bool shouldClose();
+	    virtual void swapBuffers();
 	    GLFWwindow* getContext() { return context; }
 	protected:
 	    WindowDesc description;

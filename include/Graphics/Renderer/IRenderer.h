@@ -166,6 +166,15 @@ namespace cac
 	     */ 
 	    virtual bool setShaderAttributeLocation(std::string name, int location) = 0;
 	    
+	    /** Returns the context window
+	     * The context window is needed by other modules.
+	     * The input system and the game engine have to access
+	     * the context to listen to specific  event calls.
+	     * 
+	     * @return context window
+	     */
+	    virtual IWindow* getWindow() = 0;
+	    
 	     /** Set the current active camera
 	     * Set the reference to the active camera used for the 
 	     * view and projection matrix.
@@ -174,12 +183,9 @@ namespace cac
 	     * @param[in] camera 
 	     */
 	    void setCamera(Camera& camera) { activeCamera = &camera; }
+	    
 	protected:
 	    Camera* activeCamera; /*!< Current active camera for the view/projection matrix calculation*/
-	
-	
-	    
-	    
 	};
 }
 

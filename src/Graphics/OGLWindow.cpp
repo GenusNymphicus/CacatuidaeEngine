@@ -80,5 +80,18 @@ bool cac::OGLWindow::create(cac::WindowDesc description)
     return true;
 }
 
+bool cac::OGLWindow::shouldClose()
+{
+    return glfwWindowShouldClose(context);
+}
+
+void cac::OGLWindow::swapBuffers()
+{
+    glfwPollEvents();
+    glfwSwapBuffers(context);
+}
+
+
+
 
 

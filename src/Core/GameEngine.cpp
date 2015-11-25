@@ -1,6 +1,8 @@
 #include "Core/GameEngine.h"
 
 #include <iostream>
+#include "Utility/FPSCounter.h"
+#include <Utility/Profiler.h>
 
 cac::GameEngine::~GameEngine()
 {
@@ -9,40 +11,70 @@ cac::GameEngine::~GameEngine()
 
 void cac::GameEngine::exit()
 {
-
+    isRunning = false;
 }
 
 void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, bool isMainloop)
 {
+    cac::Profiler::instance()->track("Initialize GameEngine");
+
+    if(!initialScene)
+    {
+	std::cout<<"Invalid initial gamescene passed!"<<std::endl;
+	return;
+    }
+    
+   
     if(!initializeRenderEngine(windowDesc))
 	return;
 
-    cac::Camera cam;
-    float left = 0, right = 800, top = 0, bottom = 600, near = 0, far = 10;
-    cam.setOrthogonalProjection(left, right, bottom, top, near, far);
-     
-    renderEngine.setCamera(cam);
-	 
-    renderEngine.clearScreen(0,0,1);
-    cac::Renderable renderable;
-    renderable.setTextureRectangle(0, 0, 1, 1);
-    renderable.setColor(1, 0, 0, 1);
-    renderable.scaleX = 250;
-    renderable.scaleY = 250;
-    renderable.scaleZ = 1;
-    renderable.posX = 400;
-    renderEngine.render(renderable);
-    renderEngine.updateScreen();
+    gameScenes.emplace_back(initialScene);
+    
+    if(!initialScene->setEngine(this))
+    {
+	std::cout<<"Couldn't set game engine for initial gamescene!"<<std::endl;
+	return;
+    }
+    if(!initialScene->initialize())
+    {
+	std::cout<<"Couldn't initialize initial gamescene!"<<std::endl;
+	return;
+    }
+ 
+   
+    cac::IWindow* context = renderEngine.getWindow();
+    
+    cac::FPSCounter fpsCounter;
+    
+    cac::Profiler::instance()->stop("Initialize GameEngine");
+    while(isRunning && !context->shouldClose())
+    {
+	fpsCounter.update();
+	float dt = fpsCounter.getDeltaTime();
+	
+	update(dt);
+    }
     
 }
 
-void cac::GameEngine::update()
+void cac::GameEngine::update(float dt)
 {
-
+    cac::Profiler::instance()->track("Game Loop");
+    renderEngine.clearScreen(0,0,1);
+    gameScenes.back()->update(dt);
+    renderEngine.updateScreen();
+    cac::Profiler::instance()->stop("Game Loop");
 }
+
+cac::RenderEngine<cac::OGLRenderer>* cac::GameEngine::getRenderEngine()
+{
+    return &renderEngine;
+}
+
 
 bool cac::GameEngine::initializeRenderEngine(cac::WindowDesc windowDesc)
 {
+    cac::Profiler::instance()->track("Initialize RenderEngine");
     if(!renderEngine.initialize(windowDesc))
     {
 	std::cout<<"Failed to initialze RenderEngine"<<std::endl;
@@ -153,5 +185,7 @@ bool cac::GameEngine::initializeRenderEngine(cac::WindowDesc windowDesc)
 	std::cout<<"Failed to create Quad mesh!"<<std::endl;
 	return false;
     }
+    
+        cac::Profiler::instance()->stop("Initialize RenderEngine");
     return true;
 }

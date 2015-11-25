@@ -203,7 +203,8 @@ bool cac::OGLRenderer::bindTexture(std::string texture)
 
 void cac::OGLRenderer::swapBuffers()
 {
-    glfwSwapBuffers(window.getContext());
+    window.swapBuffers();
+
 }
 
 void cac::OGLRenderer::setClearColor(float r, float g, float b)
@@ -275,3 +276,7 @@ bool cac::OGLRenderer::setShaderAttributeLocation(std::string name, int location
     return true;
 }
 
+cac::IWindow* cac::OGLRenderer::getWindow()
+{
+    return &window;
+}
