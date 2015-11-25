@@ -2,7 +2,7 @@
 #define CACATUIDAE_GRAPHICS_OGLMESH_H
 
 #include <GL/glew.h>
-#include "GraphicStructs.h"
+#include "Graphics/GraphicStructs.h"
 
 namespace cac 
 {

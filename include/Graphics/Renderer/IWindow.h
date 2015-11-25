@@ -47,12 +47,16 @@ namespace cac
 	public:
 	     
 	    /** Window creation
-	     * Creates a window 
+	     * (Re-)create the context with the new description
 	     * 
-	     * @returns true for success or false for failure
-	     * @sa getErrorMessage
+	     * 
+	     * @return true for success or false for failure
 	     */
 	    virtual bool create(WindowDesc description) = 0;
+	    
+	     /** Initialize the context
+	     * @return true for success or false for failure
+	     */
 	    virtual bool initialize(WindowDesc description) = 0;
 	protected:
 	    WindowDesc description;

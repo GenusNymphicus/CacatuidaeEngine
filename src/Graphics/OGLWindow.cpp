@@ -1,4 +1,4 @@
-#include "Graphic/OGLWindow.h"
+#include "Graphics/Renderer/OGLWindow.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>

@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['if',['if',['../tests_2CMakeLists_8txt.html#a1880620c2ae188578848c38d753781d5',1,'CMakeLists.txt']]],
-  ['include_5fdirectories',['include_directories',['../tests_2CMakeLists_8txt.html#a255763ea4d9593d9275be1fbee2bc377',1,'CMakeLists.txt']]],
-  ['initialize',['initialize',['../classCockatoo_1_1Graphic_1_1IRenderer.html#a838c249862cf6189adb9304302348a1f',1,'Cockatoo::Graphic::IRenderer::initialize()'],['../classCockatoo_1_1Graphic_1_1OGLRenderer.html#a180a5fe41fa5024a70e7f55492801aad',1,'Cockatoo::Graphic::OGLRenderer::initialize()']]],
-  ['irenderer',['IRenderer',['../classCockatoo_1_1Graphic_1_1IRenderer.html',1,'Cockatoo::Graphic']]],
-  ['irenderer_2eh',['IRenderer.h',['../IRenderer_8h.html',1,'']]]
+  ['data',['data',['../structcac_1_1FontResource.html#a98448713ac74416b075fd7981fe7fc34',1,'cac::FontResource::data()'],['../structcac_1_1TextureResource.html#aa114ec5ad97281e262063e2fb4d63f57',1,'cac::TextureResource::data()']]],
+  ['description',['description',['../classcac_1_1IWindow.html#a631cebc787d0f3853f1d00c1d50844b4',1,'cac::IWindow::description()'],['../classcac_1_1OGLWindow.html#a3409e5f2892f627d02c4e8e33b75769f',1,'cac::OGLWindow::description()']]]
 ];

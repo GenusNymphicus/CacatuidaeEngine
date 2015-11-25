@@ -1,7 +1,8 @@
 #ifndef CACATUIDAE_GRAPHICS_GRAPHIC_FONT_H
 #define CACATUIDAE_GRAPHICS_GRAPHIC_FONT_H
 
-#include "FontResource.h"
+//needed for Glyphinformation
+#include "Core/Resources/FontResource.h"
 
 namespace cac 
 {

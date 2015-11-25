@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Cockatoo Engine: /home/kevin/Desktop/Projects/C++/CockatooEngine/include/Graphic/OGLRenderer.h File Reference</title>
+<title>Cockatoo Engine: /home/kevin/Desktop/Projects/C++/CockatooEngine/include/Graphics/Renderer/OGLRenderer.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_fa06476fc9d7bb926810d65e6e447b42.html">Graphic</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_b43dbc6878c2b5c121b79d76cc4886e7.html">Graphics</a></li><li class="navelem"><a class="el" href="dir_2315f2a46e775a1921f606437f523386.html">Renderer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -93,17 +93,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">OGLRenderer.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="IRenderer_8h_source.html">IRenderer.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="IRenderer_8h_source.html">IRenderer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="OGLWindow_8h_source.html">OGLWindow.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="GLSLShaderManager_8h_source.html">GLSLShaderManager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="OGLMesh_8h_source.html">OGLMesh.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="OGLTexture_8h_source.html">OGLTexture.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for OGLRenderer.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="OGLRenderer_8h__incl.png" border="0" usemap="#_2home_2kevin_2Desktop_2Projects_2C_09_09_2CockatooEngine_2include_2Graphic_2OGLRenderer_8h" alt=""/></div>
+<div class="center"><img src="OGLRenderer_8h__incl.png" border="0" usemap="#_2home_2kevin_2Desktop_2Projects_2C_09_09_2CockatooEngine_2include_2Graphics_2Renderer_2OGLRenderer_8h" alt=""/></div>
 <!-- MAP 0 -->
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="OGLRenderer_8h__dep__incl.png" border="0" usemap="#_2home_2kevin_2Desktop_2Projects_2C_09_09_2CockatooEngine_2include_2Graphic_2OGLRenderer_8hdep" alt=""/></div>
+<div class="center"><img src="OGLRenderer_8h__dep__incl.png" border="0" usemap="#_2home_2kevin_2Desktop_2Projects_2C_09_09_2CockatooEngine_2include_2Graphics_2Renderer_2OGLRenderer_8hdep" alt=""/></div>
 <!-- MAP 1 -->
 </div>
 </div>
@@ -111,15 +116,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCockatoo_1_1Graphic_1_1OGLRenderer.html">Cockatoo::Graphic::OGLRenderer</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the OpenGL-renderer.  <a href="classCockatoo_1_1Graphic_1_1OGLRenderer.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcac_1_1OGLRenderer.html">cac::OGLRenderer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the OpenGL-renderer.  <a href="classcac_1_1OGLRenderer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:namespaceCockatoo"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceCockatoo.html">Cockatoo</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:namespaceCockatoo_1_1Graphic"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceCockatoo_1_1Graphic.html">Cockatoo::Graphic</a></td></tr>
+<tr class="memitem:namespacecac"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecac.html">cac</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

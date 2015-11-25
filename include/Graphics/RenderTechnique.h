@@ -14,7 +14,6 @@ namespace cac
 	short getNumberOfRenderpasses() { return renderPasses.size(); }
 	
     private:
-	std::string programName;
 	std::vector<std::string> renderPasses;
     };
 }

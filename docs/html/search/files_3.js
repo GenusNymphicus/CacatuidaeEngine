@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['oglrenderer_2ecpp',['OGLRenderer.cpp',['../OGLRenderer_8cpp.html',1,'']]],
-  ['oglrenderer_2eh',['OGLRenderer.h',['../OGLRenderer_8h.html',1,'']]]
+  ['irenderer_2eh',['IRenderer.h',['../IRenderer_8h.html',1,'']]],
+  ['iresource_2eh',['IResource.h',['../IResource_8h.html',1,'']]],
+  ['iwindow_2eh',['IWindow.h',['../IWindow_8h.html',1,'']]]
 ];

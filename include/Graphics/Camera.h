@@ -1,5 +1,5 @@
-#ifndef CACATUIDAE_GRAPHICS_GRAPHIC_CAMERA_H
-#define CACATUIDAE_GRAPHICS_GRAPHIC_CAMERA_H
+#ifndef CACATUIDAE_GRAPHICS_CAMERA_H
+#define CACATUIDAE_GRAPHICS_CAMERA_H
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -7,7 +7,6 @@
 
 namespace cac 
 {
-
     struct Camera
     {
     public:

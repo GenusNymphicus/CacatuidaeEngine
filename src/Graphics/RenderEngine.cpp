@@ -1,11 +1,16 @@
-#include "Graphic/RenderEngine.h"
-#include <Graphic/Camera.h>
+#include "Graphics/RenderEngine.h"
+#include <Graphics/Camera.h>
 #include <iostream>
 
 
 template<class Renderer> bool cac::RenderEngine<Renderer>::initialize(cac::WindowDesc windowDescription)
 {
-    return renderer.initialize(windowDescription) == 0;
+    return renderer.initialize(windowDescription);
+}
+
+template<class Renderer> void cac::RenderEngine<Renderer>::setShaderAttributeLocation(std::string name, int location)
+{
+    renderer.setShaderAttributeLocation(name, location);
 }
 
 template<class Renderer> void cac::RenderEngine<Renderer>::clearScreen()
@@ -18,6 +23,10 @@ template<class Renderer> void cac::RenderEngine<Renderer>::clearScreen(float r, 
     renderer.setClearColor(r, g, b);
     renderer.clearBuffers();
 }
+template<class Renderer> void cac::RenderEngine<Renderer>::render(const cac::Renderable& renderable)
+{
+    render(renderable, defaultRenderTechnique);
+}
 
 template<class Renderer> void cac::RenderEngine<Renderer>::render(const cac::Renderable& renderable, cac::RenderTechnique renderTechnique)
 {
@@ -27,6 +36,11 @@ template<class Renderer> void cac::RenderEngine<Renderer>::render(const cac::Ren
 	renderer.bindShaderProgram(renderTechnique.getRenderpass(currentPass));
 	renderer.render(renderable);
     }
+}
+
+template<class Renderer> void cac::RenderEngine<Renderer>::render(const cac::Text& text)
+{
+    render(text, defaultTextTechnique);
 }
 template<class Renderer> void cac::RenderEngine<Renderer>::render(const cac::Text& text, cac::RenderTechnique renderTechnique)
 {
@@ -42,6 +56,7 @@ template<class Renderer> void cac::RenderEngine<Renderer>::render(const cac::Tex
     float advanceX = text.posX;
     float advanceY = text.posY;
     
+    //TODO: [PERFORMANCE] caching for the texts.
     for(int i = 0; i<text.textString.size(); i++)
     {
 	const GlyphInformation& glyph = font.glyphs.at(text.textString[i]);
@@ -133,9 +148,23 @@ template<class Renderer> bool cac::RenderEngine<Renderer>::loadMesh(cac::MeshRes
     }
 }
 
-template<class Renderer> void cac::RenderEngine<Renderer>::setCamera(cac::Camera* cam) {renderer.setCamera(cam); }
+template<class Renderer> void cac::RenderEngine<Renderer>::setCamera(cac::Camera& cam) 
+{
+    renderer.setCamera(cam); 
+}
 
 template<class Renderer> void cac::RenderEngine<Renderer>::updateScreen()
 {
     renderer.swapBuffers();
 }
+
+template<class Renderer> void cac::RenderEngine<Renderer>::setDefaultRenderTechnique(cac::RenderTechnique technique)
+{
+    defaultRenderTechnique = technique;
+}
+
+template<class Renderer> void cac::RenderEngine<Renderer>::setDefaultTextTechnique(cac::RenderTechnique technique)
+{
+    defaultTextTechnique = technique;
+}
+

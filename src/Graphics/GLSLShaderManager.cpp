@@ -1,15 +1,10 @@
-#include <Graphic/GLSLShaderManager.h>
+#include "Graphics/Renderer/GLSLShaderManager.h"
 #include <iostream>
 #include <GL/glew.h>
 #include <vector>
 
 namespace cac
 {
-    GLSLShaderManager::GLSLShaderManager()
-    {
-        setAttribLocations();
-    }
-
     GLSLShaderManager::~GLSLShaderManager()
     {
 	unload();
@@ -24,13 +19,10 @@ namespace cac
         
         shaderPrograms.clear();
     }
-    void GLSLShaderManager::setAttribLocations()
+    void GLSLShaderManager::setAttribLocation(std::string name, int location)
     {
-        vertexAttribLocations["vertex"] = 0;
-        vertexAttribLocations["uv"] = 1;
-        vertexAttribLocations["color"] = 2;
-        vertexAttribLocations["textureRectangle"] = 3;
-        vertexAttribLocations["MVP"] = 4;
+	vertexAttribLocations[name] = location;
+
 
     }
     bool GLSLShaderManager::createProgram(std::string programName, std::string vertexShader, std::string fragmentShader, std::string geometryShader)

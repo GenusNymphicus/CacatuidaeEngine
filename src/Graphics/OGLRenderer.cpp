@@ -1,10 +1,10 @@
-#include "Graphic/OGLRenderer.h"
+#include "Graphics/Renderer/OGLRenderer.h"
 
 #include<iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Graphic/IWindow.h"
-#include "Graphic/Camera.h"
+#include "Graphics/Renderer/IWindow.h"
+#include "Graphics/Camera.h"
 
 #include <fstream>
 cac::OGLRenderer::~OGLRenderer()
@@ -38,10 +38,10 @@ void cac::OGLRenderer::unloadResources()
     shaderManager.unload();
 }
 
-int cac::OGLRenderer::initialize(WindowDesc windowDesc)
+bool cac::OGLRenderer::initialize(WindowDesc windowDesc)
 {
     if(!window.initialize(windowDesc))
-	return -1;
+	return false;
     
         // Enable depth test
     glEnable(GL_DEPTH_TEST);
@@ -54,15 +54,17 @@ int cac::OGLRenderer::initialize(WindowDesc windowDesc)
     // Accept fragment if it closer to the camera than the former one
     glDepthFunc(GL_LESS);
     
-    return GL_NO_ERROR;
+    return true;
 }
 
-void cac::OGLRenderer::updateContext(cac::WindowDesc windowDesc)
+bool cac::OGLRenderer::updateContext(cac::WindowDesc windowDesc)
 {
     if(window.create(windowDesc))
     {
 	unloadResources();
+	return true;
     }
+    return false;
 }
 
 bool cac::OGLRenderer::createShaderProgram(std::string programName, std::string vertexShader, std::string fragmentShader, std::string geometryShader)
@@ -89,6 +91,8 @@ bool cac::OGLRenderer::createMesh(std::string name, std::vector<Vertex> vertices
     glBindVertexArray(meshes[name].vao);
     glBindBuffer(GL_ARRAY_BUFFER, meshes[name].vbo);
 
+    
+    //TODO: Destringyfy, remove magic strings and numbers
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
 
     //shader attributes
@@ -134,7 +138,7 @@ bool cac::OGLRenderer::createMesh(std::string name, std::vector<Vertex> vertices
 }
 bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<char> data, bool hasAlpha)
 {
-    createTexture(textureName, width, height, data, (hasAlpha ? 4 : 3));
+    return createTexture(textureName, width, height, data, (hasAlpha ? 4 : 3));
     
 }
 bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<char> data, int numChannels)
@@ -182,19 +186,26 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
     return error == GL_NO_ERROR;
  }
    
-void cac::OGLRenderer::bindTexture(std::string texture)
+bool cac::OGLRenderer::bindTexture(std::string texture)
 {
     glActiveTexture(GL_TEXTURE0);
     GLint textureLoc = glGetUniformLocation(boundShaderProgram, "texture");
     
+    GLuint textureId = textures[texture].textureId;
+    if(textureId == 0)
+	std::cout<<"Texture "<<texture<<" not loaded!"<<std::endl;
+    
     glBindTexture(GL_TEXTURE_2D, textures[texture].textureId);
     glUniform1i(textureLoc, 0);
+    
+    return true;
 }
 
 void cac::OGLRenderer::swapBuffers()
 {
     glfwSwapBuffers(window.getContext());
 }
+
 void cac::OGLRenderer::setClearColor(float r, float g, float b)
 {
     glClearColor(r, g, b, 1);
@@ -204,7 +215,7 @@ void cac::OGLRenderer::clearBuffers()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 }
 
-void cac::OGLRenderer::setWireFrame(bool wireframe)
+void cac::OGLRenderer::setWireframe(bool wireframe)
 {
     if(wireframe)
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -249,20 +260,18 @@ void cac::OGLRenderer::render(const Renderable& renderable)
     glBindVertexArray(0);
 }
 
-void cac::OGLRenderer::bindShaderProgram(std::string program)
+bool cac::OGLRenderer::bindShaderProgram(std::string program)
 {
     boundShaderProgram = shaderManager.getShaderProgram(program);
     glUseProgram(boundShaderProgram);
+    
+    return true;
 }
 
-std::string cac::OGLRenderer::getErrorMessage(int errorCode)
+bool cac::OGLRenderer::setShaderAttributeLocation(std::string name, int location)
 {
-    if(errorCode >= 0)
-	return reinterpret_cast<const char*>(glewGetErrorString(errorCode));
-    else if(errorCode == -1)
-	return "Failed to initialize the render context";
-    else 
-	return "Unknown error";
+    shaderManager.setAttribLocation(name, location);
+    
+    return true;
 }
-
 

@@ -8,8 +8,8 @@ namespace cac
     {
 	float posX = 0, posY = 0, posZ = 0;
 	float texRectX= 0, texRectY = 0, texRectWidth = 1, texRectHeight = 1;
-	std::string texture = "";
-	std::string mesh = "";
+	std::string texture = "default";
+	std::string mesh = "Quad";
 	float scaleX = 1, scaleY = 1, scaleZ = 1;
 	float colorR, colorG, colorB, colorA;
 	

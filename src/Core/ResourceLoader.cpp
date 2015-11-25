@@ -1,4 +1,4 @@
-#include "Core/ResourceLoader.h"
+#include "Core/Resources/ResourceLoader.h"
 
 #include <vector>
 
@@ -158,8 +158,5 @@ std::vector<cac::TextureResource> cac::ResourceLoader::loadTextures(std::ifstrea
 }
 
 
-void cac::ResourceLoader::unloadPackage(std::string packageName)
-{
 
-}
 

@@ -3,13 +3,13 @@
 
 #include <GL/glew.h>
 #include <vector>
-#include "GraphicStructs.h"
+#include "Graphics/GraphicStructs.h"
 
 namespace cac 
 {
     struct OGLTexture
     {
-	GLuint textureId;
+	GLuint textureId = 0;
 	bool hasAlpha;
 	int width;
 	int height;

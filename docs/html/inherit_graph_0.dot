@@ -3,7 +3,5 @@ digraph "Graphical Class Hierarchy"
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="Cockatoo::Graphic::\lIRenderer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCockatoo_1_1Graphic_1_1IRenderer.html",tooltip="Interface for the renderer-implementations Provides an interface for the various renderer-implementat..."];
-  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Cockatoo::Graphic::\lOGLRenderer",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classCockatoo_1_1Graphic_1_1OGLRenderer.html",tooltip="Implementation of the OpenGL-renderer. "];
+  Node1 [label="cac::Camera",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structcac_1_1Camera.html"];
 }

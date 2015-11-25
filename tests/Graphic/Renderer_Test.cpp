@@ -5,8 +5,8 @@
 #include <iostream>
 
 #include "gtest/gtest.h"
-#include "Graphic/OGLRenderer.h"
-#include "Graphic/OGLWindow.h"
+#include "Graphics/Renderer/OGLRenderer.h"
+#include "Graphics/Renderer/OGLWindow.h"
 
 
 /*

@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['if',['if',['../tests_2CMakeLists_8txt.html#a1880620c2ae188578848c38d753781d5',1,'CMakeLists.txt']]],
-  ['include_5fdirectories',['include_directories',['../tests_2CMakeLists_8txt.html#a255763ea4d9593d9275be1fbee2bc377',1,'CMakeLists.txt']]],
-  ['initialize',['initialize',['../classCockatoo_1_1Graphic_1_1IRenderer.html#a838c249862cf6189adb9304302348a1f',1,'Cockatoo::Graphic::IRenderer::initialize()'],['../classCockatoo_1_1Graphic_1_1OGLRenderer.html#a180a5fe41fa5024a70e7f55492801aad',1,'Cockatoo::Graphic::OGLRenderer::initialize()']]]
+  ['camera',['Camera',['../structcac_1_1Camera.html#a88b221782329a543ae728b222cb80164',1,'cac::Camera']]],
+  ['clearbuffers',['clearBuffers',['../classcac_1_1IRenderer.html#af0c474a149b854911c495bcc57d7aa9a',1,'cac::IRenderer::clearBuffers()'],['../classcac_1_1OGLRenderer.html#a8d3ddd8e54519f0ff004e58a7422902c',1,'cac::OGLRenderer::clearBuffers()']]],
+  ['clearscreen',['clearScreen',['../classcac_1_1RenderEngine.html#ac7efa9629c12e9c6c9b1b024005fd6a4',1,'cac::RenderEngine::clearScreen()'],['../classcac_1_1RenderEngine.html#ae8427930a262cf2d9f743cec67483b8f',1,'cac::RenderEngine::clearScreen(float r, float g, float b)']]],
+  ['compileshader',['compileShader',['../classcac_1_1GLSLShaderManager.html#a4aee9e7ed8399dc9140595f48b4144f8',1,'cac::GLSLShaderManager']]],
+  ['create',['create',['../classcac_1_1IWindow.html#a5e872d85944274c78e2934f15c7617bd',1,'cac::IWindow::create()'],['../classcac_1_1OGLWindow.html#a30f0bb4328f1fb3005a100be3d2d5c14',1,'cac::OGLWindow::create()']]],
+  ['createmesh',['createMesh',['../classcac_1_1IRenderer.html#a1179a3510a5dbac12869669677933d53',1,'cac::IRenderer::createMesh()'],['../classcac_1_1OGLRenderer.html#a243b30f98dcd00628825ee5aa03f0812',1,'cac::OGLRenderer::createMesh()']]],
+  ['createprogram',['createProgram',['../classcac_1_1GLSLShaderManager.html#a0c9389c91cf5248d0ec494bf6b8809b2',1,'cac::GLSLShaderManager']]],
+  ['createshaderprogram',['createShaderProgram',['../classcac_1_1IRenderer.html#a61df54c19ea053010291f897b3f409cc',1,'cac::IRenderer::createShaderProgram()'],['../classcac_1_1OGLRenderer.html#a07f320da7eef5647f02dfa5644b5496e',1,'cac::OGLRenderer::createShaderProgram()']]],
+  ['createtexture',['createTexture',['../classcac_1_1IRenderer.html#a4b095c532d48739feb53845ad39ee008',1,'cac::IRenderer::createTexture(std::string textureName, int width, int height, std::vector&lt; char &gt; data, bool hasAlpha=false)=0'],['../classcac_1_1IRenderer.html#a3502571c8fb26f3ceddfa41bdd2106b6',1,'cac::IRenderer::createTexture(std::string textureName, int width, int height, std::vector&lt; char &gt; data, int numChannels)=0'],['../classcac_1_1OGLRenderer.html#a936c4ec106c8bbafc04f7c3069b290ab',1,'cac::OGLRenderer::createTexture(std::string textureName, int width, int height, std::vector&lt; char &gt; data, bool hasAlpha=false) override'],['../classcac_1_1OGLRenderer.html#a45b59139820638ccabd5739b63a1b85b',1,'cac::OGLRenderer::createTexture(std::string textureName, int width, int height, std::vector&lt; char &gt; data, int numChannels) override']]]
 ];

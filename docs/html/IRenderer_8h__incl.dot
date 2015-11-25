@@ -1,8 +1,21 @@
-digraph "/home/kevin/Desktop/Projects/C++/CockatooEngine/include/Graphic/IRenderer.h"
+digraph "/home/kevin/Desktop/Projects/C++/CockatooEngine/include/Graphics/Renderer/IRenderer.h"
 {
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="/home/kevin/Desktop\l/Projects/C++/CockatooEngine\l/include/Graphic/IRenderer.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 [label="/home/kevin/Desktop\l/Projects/C++/CockatooEngine\l/include/Graphics/Renderer\l/IRenderer.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 [label="string",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="IWindow.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$IWindow_8h.html"];
+  Node3 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Graphics/GraphicStructs.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$GraphicStructs_8h.html"];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Graphics/Renderable.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Renderable_8h.html"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Graphics/Camera.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$Camera_8h.html"];
+  Node6 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="glm/glm.hpp",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node6 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="glm/gtc/matrix_transform.hpp",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
 }

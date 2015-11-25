@@ -1,7 +1,7 @@
 #Cockatoo/src/
 
 
-add_subdirectory(Graphic)
+add_subdirectory(Graphics)
 add_subdirectory(Core)
 
 set(SOURCE_FILES ${SOURCE_FILES}

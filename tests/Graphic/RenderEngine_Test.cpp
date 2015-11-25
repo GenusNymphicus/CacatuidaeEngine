@@ -3,8 +3,8 @@
  */
 
 #include <iostream>
-#include <Graphic/RenderEngine.h>
-#include <Graphic/OGLRenderer.h>
+#include <Graphics/RenderEngine.h>
+#include <Graphics/Renderer/OGLRenderer.h>
 #include "gtest/gtest.h"
 
 

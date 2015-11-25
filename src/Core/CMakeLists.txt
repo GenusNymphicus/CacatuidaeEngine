@@ -1,4 +1,5 @@
 #Cockatoo/src/Core
 set(SOURCE_FILES ${SOURCE_FILES}
    ${CMAKE_CURRENT_SOURCE_DIR}/ResourceLoader.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/GameEngine.cpp
 PARENT_SCOPE)
