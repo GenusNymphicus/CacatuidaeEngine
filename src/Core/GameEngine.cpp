@@ -28,6 +28,8 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
     if(!initializeRenderEngine(windowDesc))
 	return;
 
+    inputManager.initialize(renderEngine.getWindow());
+    
     gameScenes.emplace_back(initialScene);
     
     if(!initialScene->setEngine(this))
@@ -35,6 +37,7 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
 	std::cout<<"Couldn't set game engine for initial gamescene!"<<std::endl;
 	return;
     }
+    
     if(!initialScene->initialize())
     {
 	std::cout<<"Couldn't initialize initial gamescene!"<<std::endl;
@@ -63,12 +66,19 @@ void cac::GameEngine::update(float dt)
     renderEngine.clearScreen(0,0,1);
     gameScenes.back()->update(dt);
     renderEngine.updateScreen();
+    inputManager.update();
+    
     cac::Profiler::instance()->stop("Game Loop");
 }
 
 cac::RenderEngine<cac::OGLRenderer>* cac::GameEngine::getRenderEngine()
 {
     return &renderEngine;
+}
+
+cac::InputManager* cac::GameEngine::getInputManager()
+{
+    return &inputManager;
 }
 
 

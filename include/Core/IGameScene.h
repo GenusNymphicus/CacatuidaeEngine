@@ -3,6 +3,7 @@
 
 #include "Graphics/RenderEngine.h"
 #include "Graphics/Renderer/OGLRenderer.h"
+#include "Input/InputManager.h"
 
 namespace cac
 {
@@ -19,6 +20,7 @@ namespace cac
 	
         virtual ~IGameScene() {}
     
+	virtual void event(std::string message){}
         virtual void update(float dt) { }
        // virtual void addSystem(ISystem* system);
        // virtual void notifySystems(Message* message) { for(auto& system : systems) system->receiveMessage(message); }
@@ -35,6 +37,7 @@ namespace cac
     //    std::vector<std::unique_ptr<ISystem>> systems;
 	GameEngine* engine;
 	RenderEngine<OGLRenderer>* renderer;
+	InputManager* input;
     };
 }
 

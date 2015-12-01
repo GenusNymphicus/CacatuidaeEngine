@@ -24,6 +24,8 @@ bool cac::OGLWindow::initialize(cac::WindowDesc description)
     //glew
     if(!initialized)
     {
+	
+	
 	glewExperimental = GL_TRUE;
 	GLenum err = glewInit();
 	

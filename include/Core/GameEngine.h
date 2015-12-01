@@ -27,10 +27,12 @@ namespace cac
 // 	void popScene();
 	
 	RenderEngine<OGLRenderer>* getRenderEngine();
+	InputManager* getInputManager();
+ 
     private:
 	bool initializeRenderEngine(cac::WindowDesc windowDesc);
 	
-	
+	InputManager inputManager;
 	RenderEngine<OGLRenderer> renderEngine;
 		
         bool isRunning;
