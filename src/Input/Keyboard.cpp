@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "Graphics/Renderer/OGLWindow.h"
 #include <iostream>
+
 void cac::Keyboard::setWindow(cac::IWindow* window)
 {
     cac::OGLWindow* oglWindow = dynamic_cast<OGLWindow*>(window);
@@ -30,10 +31,13 @@ void cac::Keyboard::update(unsigned int context)
 	int state = glfwGetKey(window->getContext(), keyActions.first);
 	if(state == GLFW_PRESS && lastKeyState == cac::KeyState::RELEASED)
 	    keyState = cac::KeyState::PRESSED;
-	else if(state == GLFW_RELEASE && (lastKeyState == cac::KeyState::PRESSED || lastKeyState == cac::KeyState::HELD ))
-	    keyState = cac::KeyState::RELEASED;
-	else if(state == GLFW_PRESS && (lastKeyState == cac::KeyState::PRESSED || lastKeyState == cac::KeyState::HELD))
-	    keyState = cac::KeyState::HELD;
+	else if((lastKeyState == cac::KeyState::PRESSED || lastKeyState == cac::KeyState::HELD ))
+	{
+	    if(state == GLFW_RELEASE)
+		keyState = cac::KeyState::RELEASED;
+	    else if(state == GLFW_PRESS)
+		keyState = cac::KeyState::HELD;
+	}
 	else keyState = cac::KeyState::NONE;
 	
 	if(keyState != cac::KeyState::NONE)

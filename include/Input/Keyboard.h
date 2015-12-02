@@ -3,31 +3,30 @@
 
 #include <vector>
 #include <map>
-#include <string>
-#include <functional>
 #include "KeyState.h"
+#include "IInputDevice.h"
 
 namespace cac
 {
     class IWindow;
     class OGLWindow;
     
-    class Keyboard 
+    class Keyboard : public IInputDevice
     {
     public:
-	void setWindow(IWindow* window);
-	void update(unsigned int context);
+	virtual void setWindow(IWindow* window) override;
+	virtual void update(unsigned int context) override;
+	
 	//Key Actions
 	void bind(int key, KeyState keyState,std::string actionString, unsigned int context = 0);
 
-	void setInputCallback(std::function<void(std::string)> callback) { this->callback = callback; }
-	
+
     private:
 	struct KeyAction
 	{
-	    KeyState state;
 	    std::string actionString;
 	    unsigned int context;
+	    KeyState state;
 	    
 	    KeyAction() {}
 	    KeyAction(std::string actionString, KeyState state,unsigned int context) 
@@ -38,11 +37,10 @@ namespace cac
 	    } 
 	};
 	
-	std::function<void(std::string)> callback;
+
 	cac::OGLWindow* window;
 	std::map<int, KeyState> lastKeyStates;
 	std::map<int, std::vector<KeyAction>> mappedKeys;
-	
     };
 }
 

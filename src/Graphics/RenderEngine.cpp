@@ -165,7 +165,7 @@ template<class Renderer> void cac::RenderEngine<Renderer>::setDefaultRenderTechn
 
 template<class Renderer> cac::IWindow* cac::RenderEngine<Renderer>::getWindow()
 {
-    renderer.getWindow();
+    return renderer.getWindow();
 }
 
 template<class Renderer> void cac::RenderEngine<Renderer>::setDefaultTextTechnique(cac::RenderTechnique technique)

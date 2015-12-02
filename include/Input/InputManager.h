@@ -7,6 +7,7 @@
 #include <string>
 #include <functional>
 #include "Keyboard.h"
+#include "Mouse.h"
 
 namespace cac
 {
@@ -19,11 +20,13 @@ namespace cac
 	void update();
 	
 	Keyboard* getKeyboard() { return &keyboard; }
+	Mouse* getMouse() { return &mouse; }
     private:
 
 	 unsigned int currentContext;
 	 
 	 Keyboard keyboard;
+	 Mouse mouse;
     };
 }
 
