@@ -97,7 +97,8 @@ namespace cac
 	* 
 	* @param[out] ResourcePackage return the filled ResourcePackage with all loaded Resources
 	*/
-	void loadAudio(std::ifstream& packageFile);
+	
+	std::vector<cac::AudioResource> loadAudios(std::ifstream& packageFile);
 	
 	/** Helper method for converting the binary Data
 	 * Converts the binary data into a 4-byte unsigned integer. 

@@ -1,0 +1,4 @@
+#Cockatoo/src/Core
+set(SOURCE_FILES ${SOURCE_FILES}
+   ${CMAKE_CURRENT_SOURCE_DIR}/OALAudioPlayer.cpp
+PARENT_SCOPE)

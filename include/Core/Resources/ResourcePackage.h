@@ -10,6 +10,7 @@
 #include <vector>
 #include "TextureResource.h"
 #include "FontResource.h"
+#include "AudioResource.h"
 
 namespace cac 
 {
@@ -24,6 +25,7 @@ namespace cac
  
 	std::vector<TextureResource> textures; /*!< loaded textures */
 	std::vector<FontResource> fonts; /*!< loaded fonts */
+	std::vector<AudioResource> audios; /*!< loaded audios */
     };
 }
 #endif

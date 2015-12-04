@@ -4,7 +4,8 @@
 #include "Graphics/RenderEngine.h"
 #include "Graphics/Renderer/OGLRenderer.h"
 #include "Input/InputManager.h"
-
+#include "Audio/Player/OALAudioPlayer.h"
+#include "Audio/AudioManager.h"
 namespace cac
 {
     class GameEngine;
@@ -38,6 +39,7 @@ namespace cac
 	GameEngine* engine;
 	RenderEngine<OGLRenderer>* renderer;
 	InputManager* input;
+	AudioManager<OALAudioPlayer>* audio;
     };
 }
 

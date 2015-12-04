@@ -7,6 +7,8 @@
 #include "IGameScene.h"
 #include "Graphics/RenderEngine.h"
 #include "Graphics/Renderer/OGLRenderer.h"
+#include "Audio/AudioManager.h"
+#include <Audio/Player/OALAudioPlayer.h>
 
 namespace cac
 {
@@ -25,8 +27,11 @@ namespace cac
 	
 // 	void pushScene(IGameScene* scene);
 // 	void popScene();
+
+	bool loadPackage(std::string packagePath);
 	
 	RenderEngine<OGLRenderer>* getRenderEngine();
+	AudioManager<OALAudioPlayer>* getAudioManager();
 	InputManager* getInputManager();
  
     private:
@@ -34,7 +39,8 @@ namespace cac
 	
 	InputManager inputManager;
 	RenderEngine<OGLRenderer> renderEngine;
-		
+	AudioManager<OALAudioPlayer> audioManager;
+	
         bool isRunning;
         std::vector<std::unique_ptr<IGameScene>> gameScenes;
     };

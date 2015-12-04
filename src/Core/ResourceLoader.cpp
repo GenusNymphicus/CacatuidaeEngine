@@ -1,6 +1,8 @@
 #include "Core/Resources/ResourceLoader.h"
+#include <Core/Resources/AudioResource.h>
 
 #include <vector>
+#include <stdint.h>
 
 cac::ResourcePackage cac::ResourceLoader::loadPackage(std::string packageName)
 {
@@ -13,6 +15,7 @@ cac::ResourcePackage cac::ResourceLoader::loadPackage(std::string packageName)
     {
 	package.fonts = loadFonts(packageFile);
 	package.textures = loadTextures(packageFile);
+	package.audios = loadAudios(packageFile);
     }
     return package;
 }
@@ -34,14 +37,58 @@ uint32_t cac::ResourceLoader::readBytesToUInt32(std::ifstream& packageFile, unsi
 }
 
 
-void cac::ResourceLoader::loadAudio(std::ifstream& packageFile)
+std::vector<cac::AudioResource> cac::ResourceLoader::loadAudios(std::ifstream& packageFile)
 {
-   
+        unsigned char buffer[256];
+
+	//first byte number of audios
+	uint32_t numberOfAudios = readBytesToUInt32(packageFile, 1);
+	std::vector<AudioResource> audios(numberOfAudios);
+	
+	for(unsigned i = 0; i<numberOfAudios; ++i)
+	{
+	    //length of the audio name
+	    uint32_t audioNameLength =  readBytesToUInt32(packageFile, 1);
+	    
+	    //read audio name
+	    packageFile.read((char*)buffer, audioNameLength);
+	    std::string audioName((char*)buffer, audioNameLength);
+	    audios[i].name = audioName;
+	    
+	    //1 byte channels 
+	    uint32_t channels  =  readBytesToUInt32(packageFile, 1);
+	    audios[i].numberOfChannels = channels;    
+	    
+	     //4 byte sampleRate
+	    uint32_t sampleRate =  readBytesToUInt32(packageFile, 4);
+	    audios[i].sampleRate = sampleRate;
+	    
+	    //4 byte framecount
+	    uint32_t numberOfFrames =  readBytesToUInt32(packageFile, 4);
+	    audios[i].numberOfFrames = numberOfFrames;
+	    
+	    //4 byte audio data count 
+	    uint32_t audioDataCount =  readBytesToUInt32(packageFile, 4);
+	    
+	    
+	    //reserve 2 bytes per each data to read
+	    std::vector<char> dataBytes(audioDataCount*2);
+	    audios[i].data.resize(audioDataCount);
+	    
+	    packageFile.read((char*) &dataBytes[0], audioDataCount*2);
+	    
+	    for(unsigned int j =0 ; j<audioDataCount; j++)
+	    {
+		audios[i].data[j] = ((int32_t) dataBytes[2*j+0] << 8) |
+		          ((int32_t) dataBytes[2*j+1] & 0x00FF);
+	    }
+	}
+	return audios;
 }
 
 std::vector<cac::FontResource> cac::ResourceLoader::loadFonts(std::ifstream& packageFile)
 {
- unsigned char buffer[256];
+    unsigned char buffer[256];
     
     //first byte number of fonts
     uint32_t numberOfFonts = readBytesToUInt32(packageFile, 1);
@@ -151,8 +198,6 @@ std::vector<cac::TextureResource> cac::ResourceLoader::loadTextures(std::ifstrea
 	
 	textures[i].data.resize(textureDataCount);
 	packageFile.read((char*) &textures[i].data[0], textureDataCount);
-	
-
     }
     return textures;
 }

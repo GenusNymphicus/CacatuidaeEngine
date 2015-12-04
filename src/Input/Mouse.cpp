@@ -43,7 +43,7 @@ void cac::Mouse::update(unsigned int context)
 	if(leftButtonState == GLFW_RELEASE)
 	    leftMouseInputState = EMouseInput::LEFT_BUTTON_RELEASE;
 	else if(leftButtonState == GLFW_PRESS)
-	leftMouseInputState = EMouseInput::LEFT_BUTTON_HOLD;
+	    leftMouseInputState = EMouseInput::LEFT_BUTTON_HOLD;
     }
     else leftMouseInputState = EMouseInput::NONE;
     
@@ -54,7 +54,7 @@ void cac::Mouse::update(unsigned int context)
 	if(rightButtonState == GLFW_RELEASE)
 	    rightMouseInputState = EMouseInput::RIGHT_BUTTON_RELEASE;
 	else if(rightButtonState == GLFW_PRESS)
-	rightMouseInputState = EMouseInput::RIGHT_BUTTON_HOLD;
+	    rightMouseInputState = EMouseInput::RIGHT_BUTTON_HOLD;
     }
     else rightMouseInputState = EMouseInput::NONE;
     

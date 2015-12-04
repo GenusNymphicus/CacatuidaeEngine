@@ -1,4 +1,5 @@
 #include "Core/GameEngine.h"
+#include <Core/Resources/ResourceLoader.h>
 
 #include <iostream>
 #include "Utility/FPSCounter.h"
@@ -28,6 +29,9 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
     if(!initializeRenderEngine(windowDesc))
 	return;
 
+    if(!audioManager.initialize())
+	return;
+    
     inputManager.initialize(renderEngine.getWindow());
     
     gameScenes.emplace_back(initialScene);
@@ -66,15 +70,41 @@ void cac::GameEngine::update(float dt)
     renderEngine.clearScreen(0,0,1);
     gameScenes.back()->update(dt);
     renderEngine.updateScreen();
+  
     inputManager.update();
-    
+    audioManager.update();
     cac::Profiler::instance()->stop("Game Loop");
 }
+
+bool cac::GameEngine::loadPackage(std::string packagePath)
+{
+    ResourceLoader loader;
+    ResourcePackage package;
+    package = loader.loadPackage(packagePath);
+    
+    for(auto& texture : package.textures)
+	renderEngine.loadTexture(texture);
+    
+    for(auto& font: package.fonts)
+	renderEngine.loadFont(font);
+    
+    for(auto& audio : package.audios)
+	audioManager.loadAudio(audio);
+    
+    return true;
+}
+
 
 cac::RenderEngine<cac::OGLRenderer>* cac::GameEngine::getRenderEngine()
 {
     return &renderEngine;
 }
+
+cac::AudioManager<cac::OALAudioPlayer>* cac::GameEngine::getAudioManager()
+{
+    return &audioManager;
+}
+
 
 cac::InputManager* cac::GameEngine::getInputManager()
 {
