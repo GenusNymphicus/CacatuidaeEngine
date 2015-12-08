@@ -5,6 +5,14 @@
 #include "Utility/FPSCounter.h"
 #include <Utility/Profiler.h>
 
+cac::GameEngine* engine = nullptr;
+//placeholder
+void emscripten_update()
+{
+    engine->update();
+}
+
+
 cac::GameEngine::~GameEngine()
 {
 
@@ -18,6 +26,7 @@ void cac::GameEngine::exit()
 void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, bool isMainloop)
 {
     cac::Profiler::instance()->track("Initialize GameEngine");
+    engine = this;
 
     if(!initialScene)
     {
@@ -29,9 +38,10 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
     if(!initializeRenderEngine(windowDesc))
 	return;
 
+    
     if(!audioManager.initialize())
 	return;
-    
+
     inputManager.initialize(renderEngine.getWindow());
     
     gameScenes.emplace_back(initialScene);
@@ -42,6 +52,7 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
 	return;
     }
     
+ 
     if(!initialScene->initialize())
     {
 	std::cout<<"Couldn't initialize initial gamescene!"<<std::endl;
@@ -54,18 +65,25 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
     cac::FPSCounter fpsCounter;
     
     cac::Profiler::instance()->stop("Initialize GameEngine");
+    
+#if defined(EMSCRIPTEN)
+
+    emscripten_set_main_loop(emscripten_update, 0, 1);
+
+#else
     while(isRunning && !context->shouldClose())
     {
-	fpsCounter.update();
-	float dt = fpsCounter.getDeltaTime();
-	
-	update(dt);
+	update();
     }
-    
+#endif
 }
 
-void cac::GameEngine::update(float dt)
+void cac::GameEngine::update()
 {
+    static float dtSum = 0;
+    fpsCounter.update();
+    float dt = fpsCounter.getDeltaTime();
+	
     cac::Profiler::instance()->track("Game Loop");
     renderEngine.clearScreen(0,0,1);
     gameScenes.back()->update(dt);
@@ -74,6 +92,13 @@ void cac::GameEngine::update(float dt)
     inputManager.update();
     audioManager.update();
     cac::Profiler::instance()->stop("Game Loop");
+    
+    dtSum += dt;
+    if(dtSum >= 1.0f)
+    {
+	std::cout<<"FPS: "<<fpsCounter.getDeltaTime()<<std::endl;
+	dtSum = 0.0f;
+    }    
 }
 
 bool cac::GameEngine::loadPackage(std::string packagePath)
@@ -121,7 +146,45 @@ bool cac::GameEngine::initializeRenderEngine(cac::WindowDesc windowDesc)
 	return false;
     }
     
+#if defined(EMSCRIPTEN)
+std::string vertexShader = "precision mediump float;"
+			    "attribute vec3 vertex;"
+			    "attribute vec2 uv;"
+			    "attribute vec4 color;"
+			    "attribute vec4 textureRectangle;"
+			    "attribute mat4 MVP;"
+
+			    "varying vec4 fragmentColor;"
+			    "varying vec2 fragmentUV;"
+			    "void main()"
+			    "{"
+			    "    fragmentColor = color;"
+			    "    fragmentUV.x = textureRectangle.x + uv.x * textureRectangle.z;"
+			    "    fragmentUV.y = textureRectangle.y + uv.y * textureRectangle.a;"
+			    "    gl_Position = MVP* vec4(vertex, 1.0);"
+			    "}";
     
+	
+std::string fragShader = "precision mediump float;"
+			"uniform sampler2D texture;"
+			"varying vec4 fragmentColor;"
+			"varying vec2 fragmentUV;"
+			"void main()"
+			"{"
+			"    gl_FragColor =  fragmentColor * texture2D(texture, fragmentUV);"
+			"}";
+			
+			
+std::string fragShaderText = "precision mediump float;"
+			    "uniform sampler2D texture;"
+			    "varying vec4 fragmentColor;"
+			    "varying vec2 fragmentUV;"
+			    "void main()"
+			   "{"
+				"gl_FragColor = fragmentColor;"
+				"gl_FragColor.a = texture2D(texture, fragmentUV).r;"
+			    "}";			
+#else
     //default resources
     std::string vertexShader = "#version 330\n"
 				"layout (location = 0) in vec3 vertex;"
@@ -146,7 +209,7 @@ bool cac::GameEngine::initializeRenderEngine(cac::WindowDesc windowDesc)
 				"out vec4 finalColor;"
 				"void main()"
 				"{"
-				"finalColor =  vec4(fragmentColor.rgb,texture2D(texture, fragmentUV).r);"
+				"    finalColor =  fragmentColor * texture2D(texture, fragmentUV);"
 				"}";
 			
      std::string fragShaderText = "#version 330\n"
@@ -159,7 +222,7 @@ bool cac::GameEngine::initializeRenderEngine(cac::WindowDesc windowDesc)
 				"finalColor =  vec4(fragmentColor.rgb,texture2D(texture, fragmentUV).r);"
 				"}";
 			
-				
+#endif
 				
 				
     renderEngine.setShaderAttributeLocation("vertex", 0);
@@ -194,7 +257,7 @@ bool cac::GameEngine::initializeRenderEngine(cac::WindowDesc windowDesc)
     }
     
     cac::RenderTechnique textTechnique;
-    basicTechnique.addRenderpass("textProgram");
+    textTechnique.addRenderpass("textProgram");
     renderEngine.setDefaultTextTechnique(textTechnique);
      
     cac::TextureResource defaultTexture;

@@ -15,7 +15,7 @@
 
 namespace cac 
 {
-    class Camera;
+    struct Camera;
     template<class Renderer> class RenderEngine 
     {
     public:

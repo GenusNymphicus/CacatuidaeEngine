@@ -4,8 +4,13 @@
 #include "Graphics/RenderEngine.h"
 #include "Graphics/Renderer/OGLRenderer.h"
 #include "Input/InputManager.h"
+#include "Input/InputKeys.h"
+#include "Input/EMouseInput.h"
+
 #include "Audio/Player/OALAudioPlayer.h"
 #include "Audio/AudioManager.h"
+#include "Audio/Sound.h"
+
 namespace cac
 {
     class GameEngine;
@@ -14,19 +19,14 @@ namespace cac
     {
     public:
 	bool setEngine(GameEngine* engine);
-	
-	
         virtual bool initialize() {return true;}
-	
-	
         virtual ~IGameScene() {}
-    
 	virtual void event(std::string message){}
         virtual void update(float dt) { }
-       // virtual void addSystem(ISystem* system);
-       // virtual void notifySystems(Message* message) { for(auto& system : systems) system->receiveMessage(message); }
 	virtual void refresh() { }
 	
+       // virtual void addSystem(ISystem* system);
+       // virtual void notifySystems(Message* message) { for(auto& system : systems) system->receiveMessage(message); }
    /*     GameObject* getGameObject(unsigned int gameObjectId);
         void removeGameObject(unsigned int gameObjectid);
         void addGameObject(GameObject* gameObject);

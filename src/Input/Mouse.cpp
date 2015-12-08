@@ -33,8 +33,8 @@ void cac::Mouse::update(unsigned int context)
     int leftButtonState = glfwGetMouseButton(window->getContext(), GLFW_MOUSE_BUTTON_LEFT);
     int rightButtonState = glfwGetMouseButton(window->getContext(), GLFW_MOUSE_BUTTON_RIGHT);
     
-    EMouseInput leftMouseInputState;
-    EMouseInput rightMouseInputState;
+    EMouseInput leftMouseInputState = EMouseInput::NONE;
+    EMouseInput rightMouseInputState = EMouseInput::NONE;
     
     if(leftButtonState == GLFW_PRESS && (previousStates[EMouseButtons::LEFT_BUTTON] == EMouseInput::NONE || previousStates[EMouseButtons::LEFT_BUTTON] == EMouseInput::LEFT_BUTTON_RELEASE))
 	leftMouseInputState = EMouseInput::LEFT_BUTTON_PRESS;
@@ -45,7 +45,6 @@ void cac::Mouse::update(unsigned int context)
 	else if(leftButtonState == GLFW_PRESS)
 	    leftMouseInputState = EMouseInput::LEFT_BUTTON_HOLD;
     }
-    else leftMouseInputState = EMouseInput::NONE;
     
     if(rightButtonState == GLFW_PRESS && (previousStates[EMouseButtons::RIGHT_BUTTON] == EMouseInput::NONE || previousStates[EMouseButtons::RIGHT_BUTTON] == EMouseInput::RIGHT_BUTTON_RELEASE))
 	rightMouseInputState = EMouseInput::RIGHT_BUTTON_PRESS;
@@ -56,7 +55,6 @@ void cac::Mouse::update(unsigned int context)
 	else if(rightButtonState == GLFW_PRESS)
 	    rightMouseInputState = EMouseInput::RIGHT_BUTTON_HOLD;
     }
-    else rightMouseInputState = EMouseInput::NONE;
     
     previousStates[EMouseButtons::LEFT_BUTTON] = leftMouseInputState;
     previousStates[EMouseButtons::RIGHT_BUTTON] = rightMouseInputState;

@@ -25,7 +25,7 @@ void cac::Keyboard::update(unsigned int context)
 {
     for(auto keyActions : mappedKeys)
     {
-	cac::KeyState keyState;
+	cac::KeyState keyState  = cac::KeyState::NONE;;
 	cac::KeyState lastKeyState = lastKeyStates[keyActions.first];
 
 	int state = glfwGetKey(window->getContext(), keyActions.first);
@@ -38,7 +38,6 @@ void cac::Keyboard::update(unsigned int context)
 	    else if(state == GLFW_PRESS)
 		keyState = cac::KeyState::HELD;
 	}
-	else keyState = cac::KeyState::NONE;
 	
 	if(keyState != cac::KeyState::NONE)
 	    lastKeyStates[keyActions.first] = keyState;

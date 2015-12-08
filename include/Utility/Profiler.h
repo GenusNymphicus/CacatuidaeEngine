@@ -18,9 +18,11 @@ namespace cac
 	void track(std::string sectionName);
 	void saveAs(std::string fileName);
 	
+	void enabled(bool enable);
+	bool enabled();
     private:
 	Profiler();
-	
+	bool enable = true;
 	std::map<std::string, unsigned int> trackedSections;
 	std::map<std::string, std::vector<unsigned int>> sectionResults;
 	

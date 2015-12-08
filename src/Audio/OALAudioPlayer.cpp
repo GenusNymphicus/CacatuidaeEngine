@@ -12,15 +12,18 @@ cac::OALAudioPlayer::~OALAudioPlayer()
 
 bool cac::OALAudioPlayer::initialize()
 {
-    if(!alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT"))
-    {
-	std::cout<<"Enumeration not available!"<<std::endl;
-	return false;
-    }
+  
     std::cout<<"\nAvailable audio devices:"<<std::endl;
     
     std::vector<std::string> devices = getAudioDevices();
     
+    
+        if(!alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT"))
+    {
+	std::cout<<"Enumeration not available!"<<std::endl;
+//	return false;
+    }
+     
     for(auto device : devices)
     {
 	std::cout<<"\t"<<device<<std::endl;
@@ -32,11 +35,13 @@ bool cac::OALAudioPlayer::initialize()
     checkError("");
     
     audioDevice = alcOpenDevice(defaultDeviceName);
+    
     if(!audioDevice)
     {
 	std::cout<<"Failed to open the audio device"<<std::endl;
 	return false;
     }
+
 
     checkError("Open audio device");   
 	
@@ -81,6 +86,7 @@ bool cac::OALAudioPlayer::generateSourcePool(unsigned int numberOfSources)
 	
 	audioSources[source] = 0;
     }
+    return true;
 }
 
 
@@ -173,7 +179,7 @@ void cac::OALAudioPlayer::release()
 	alDeleteSources(1, &audioSource.first);
 	
     alcMakeContextCurrent(nullptr);
-    alcDestroyContext(context);
+  //  alcDestroyContext(context);
     alcCloseDevice(audioDevice);
 }
 

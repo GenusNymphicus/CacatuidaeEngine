@@ -8,7 +8,7 @@
 #include <string>
 #include "IWindow.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 namespace cac
 {	
 	/** OpenGL window-implementation using GLFW3
@@ -17,8 +17,6 @@ namespace cac
 	class OGLWindow : public IWindow
 	{
 	public:
-	     
-	    
 	    OGLWindow();
 	    
 	    /** Window creation

@@ -158,9 +158,33 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-    glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
+    bool po2X = false;
+    bool po2Y = false;
+    
+    int roof = (width > height ? width : height);
+    if(roof <= 1024)
+    {
+	for(int i = 2; i<=roof; i*=2)
+	{
+	    if(width == i)
+		po2X = true;
+	    if(height == i)
+		po2Y = true;
+	}
+    }
+    
+    if(po2X && po2Y)
+    {
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+    }
+    else 
+    {
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+    }
+	
     GLint internalFormat;
     switch (numChannels)
     {
@@ -171,7 +195,24 @@ bool cac::OGLRenderer::createTexture(std::string textureName, int width, int hei
     }
     
 
-    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, internalFormat, GL_UNSIGNED_BYTE, &data[0]);
+#if EMSCRIPTEN
+	if(internalFormat == GL_RED)
+	{
+	    std::vector<char> fontData;
+	    for(unsigned int i = 0; i<data.size(); i++)
+	    {
+		fontData.push_back(data[i]);
+		fontData.push_back(0);
+		fontData.push_back(0);
+
+	    }
+	    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, &fontData[0]);
+	}
+	else 
+       glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, internalFormat, GL_UNSIGNED_BYTE, &data[0]);
+#else 
+    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, internalFormat, GL_UNSIGNED_BYTE, &data[0]);     
+#endif
     glBindTexture(GL_TEXTURE_2D, 0);
     
 
@@ -232,11 +273,8 @@ void cac::OGLRenderer::render(const Renderable& renderable)
     
     glBindVertexArray(meshes[renderable.mesh].vao);
     
-    
-
     glm::vec3 position(renderable.posX, renderable.posY, renderable.posZ);
-    glm::vec3 scale(renderable.scaleX, renderable.scaleY,renderable.scaleZ);
-		
+    glm::vec3 scale(renderable.scaleX, renderable.scaleY,renderable.scaleZ);	
 		    
     glm::mat4 mvp;
     mvp = glm::translate(mvp, position);
@@ -249,7 +287,6 @@ void cac::OGLRenderer::render(const Renderable& renderable)
     float color[] = { renderable.colorR, renderable.colorG, renderable.colorB, renderable.colorA };
     glBindBuffer(GL_ARRAY_BUFFER, meshes[renderable.mesh].color);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4, &color[0], GL_DYNAMIC_DRAW);
-
     
     float texRect[] = { renderable.texRectX, renderable.texRectY, renderable.texRectWidth , renderable.texRectHeight };
     

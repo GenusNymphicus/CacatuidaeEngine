@@ -1,6 +1,12 @@
 #ifndef CACATUIDAE_CORE_GAME_ENGINE_H
 #define CACATUIDAE_CORE_GAME_ENGINE_H
 
+#if defined(EMSCRIPTEN)
+    #include <emscripten/emscripten.h>
+#endif
+
+
+
 #include <memory>
 #include <vector>
 
@@ -9,6 +15,7 @@
 #include "Graphics/Renderer/OGLRenderer.h"
 #include "Audio/AudioManager.h"
 #include <Audio/Player/OALAudioPlayer.h>
+#include "Utility/FPSCounter.h"
 
 namespace cac
 {
@@ -20,8 +27,8 @@ namespace cac
         //run the game. The parameter is the first gameScene that should run.
         void run(IGameScene* initialScene, WindowDesc windowDesc, bool isMainloop = true);
 	
-	void update(float dt);
-        
+	void update();
+	
 	//exit the whole game
         void exit();
 	
@@ -36,7 +43,7 @@ namespace cac
  
     private:
 	bool initializeRenderEngine(cac::WindowDesc windowDesc);
-	
+	FPSCounter fpsCounter;
 	InputManager inputManager;
 	RenderEngine<OGLRenderer> renderEngine;
 	AudioManager<OALAudioPlayer> audioManager;

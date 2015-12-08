@@ -62,3 +62,13 @@ void cac::Profiler::setMaxSampleSize(int n)
 {
     maxSampleSize = n;
 }
+
+void cac::Profiler::enabled(bool enable)
+{
+    this->enable = enable;
+}
+
+bool cac::Profiler::enabled()
+{
+    return enable;
+}

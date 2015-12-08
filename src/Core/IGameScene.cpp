@@ -1,6 +1,6 @@
 #include "Core/IGameScene.h"
 #include "Core/GameEngine.h"
-
+#include <iostream>
 bool cac::IGameScene::setEngine(cac::GameEngine* engine)
 {
     this->engine = engine;

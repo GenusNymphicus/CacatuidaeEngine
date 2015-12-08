@@ -3,7 +3,6 @@
 
 #include <string>
 #include <map>
-#include <boost/concept_check.hpp>
 
 #include "Core/Resources/AudioResource.h"
 #include "Sound.h"
