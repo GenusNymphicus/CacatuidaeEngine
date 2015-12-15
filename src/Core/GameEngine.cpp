@@ -80,25 +80,25 @@ void cac::GameEngine::run(IGameScene* initialScene, cac::WindowDesc windowDesc, 
 
 void cac::GameEngine::update()
 {
-    static float dtSum = 0;
+    const float fixedTimeStep = 1.0f/30.0f;
     fpsCounter.update();
     float dt = fpsCounter.getDeltaTime();
-	
-    cac::Profiler::instance()->track("Game Loop");
-    renderEngine.clearScreen(0,0,1);
-    gameScenes.back()->update(dt);
-    renderEngine.updateScreen();
-  
-    inputManager.update();
-    audioManager.update();
-    cac::Profiler::instance()->stop("Game Loop");
-    
-    dtSum += dt;
-    if(dtSum >= 1.0f)
+    do
     {
-	std::cout<<"FPS: "<<fpsCounter.getDeltaTime()<<std::endl;
-	dtSum = 0.0f;
-    }    
+	float usedTimeStep = fixedTimeStep;
+	if(dt < fixedTimeStep)
+	    usedTimeStep = dt;
+	cac::Profiler::instance()->track("Game Loop");
+	renderEngine.clearScreen();
+	gameScenes.back()->update(usedTimeStep);
+	renderEngine.updateScreen();
+    
+	inputManager.update();
+	audioManager.update();
+	cac::Profiler::instance()->stop("Game Loop");
+	    
+	dt -= fixedTimeStep;
+    }while(dt > 0.0f);
 }
 
 bool cac::GameEngine::loadPackage(std::string packagePath)

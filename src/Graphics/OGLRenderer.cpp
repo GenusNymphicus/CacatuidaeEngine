@@ -52,7 +52,7 @@ bool cac::OGLRenderer::initialize(WindowDesc windowDesc)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Accept fragment if it closer to the camera than the former one
-    glDepthFunc(GL_LESS);
+    glDepthFunc(GL_ALWAYS);
     
     return true;
 }
