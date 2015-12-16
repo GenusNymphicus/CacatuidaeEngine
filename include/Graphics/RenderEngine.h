@@ -12,6 +12,7 @@
 #include "Core/Resources/FontResource.h"
 #include "Core/Resources/ShaderResource.h"
 #include "Core/Resources/MeshResource.h"
+#include "Renderer/ETestMethod.h"
 
 namespace cac 
 {
@@ -42,7 +43,7 @@ namespace cac
 	void setCamera(Camera& camera);
 	
 	void unloadTexture(std::string name);
-	
+	void setDepthTest(ETestMethod testMethod);
 	IWindow* getWindow();
 	
 	

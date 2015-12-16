@@ -38,6 +38,19 @@ void cac::OGLRenderer::unloadResources()
     shaderManager.unload();
 }
 
+void cac::OGLRenderer::setDepthTest(ETestMethod testMethod)
+{
+  switch(testMethod)
+  {
+    case (ETestMethod::ACCEPT_NONE): {   glDepthFunc(GL_NEVER);  break; }
+    case (ETestMethod::ACCEPT_LESS): {    glDepthFunc(GL_LESS); break; }
+    case (ETestMethod::ACCEPT_ALL): {   glDepthFunc(GL_ALWAYS); break; }
+    default:  glDepthFunc(GL_ALWAYS);
+      
+  };
+}
+
+
 bool cac::OGLRenderer::initialize(WindowDesc windowDesc)
 {
     if(!window.initialize(windowDesc))
@@ -52,7 +65,7 @@ bool cac::OGLRenderer::initialize(WindowDesc windowDesc)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Accept fragment if it closer to the camera than the former one
-    glDepthFunc(GL_ALWAYS);
+    glDepthFunc(GL_LESS);
     
     return true;
 }

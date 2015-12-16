@@ -43,6 +43,8 @@ namespace cac
 	virtual bool bindTexture(std::string texture) override;
 	virtual void setWireframe(bool wireframe) override;
 	virtual bool setShaderAttributeLocation(std::string name, int location) override;
+	virtual void setDepthTest(ETestMethod testMethod) override;
+	
 	virtual IWindow* getWindow();
 	void unloadResources();
     private:

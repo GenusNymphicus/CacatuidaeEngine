@@ -11,6 +11,7 @@
 #include "Graphics/GraphicStructs.h"
 #include "Graphics/Renderable.h"
 #include "Graphics/Camera.h"
+#include "ETestMethod.h"
 
 namespace cac
 {	    
@@ -174,6 +175,8 @@ namespace cac
 	     * @return context window
 	     */
 	    virtual IWindow* getWindow() = 0;
+	    
+	    virtual void setDepthTest(ETestMethod test) = 0;
 	    
 	     /** Set the current active camera
 	     * Set the reference to the active camera used for the 

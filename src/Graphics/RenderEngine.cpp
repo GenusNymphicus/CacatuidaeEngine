@@ -103,6 +103,11 @@ template<class Renderer> bool cac::RenderEngine<Renderer>::loadTexture(TextureRe
 	return false;
     }
 }
+template<class Renderer> void cac::RenderEngine<Renderer>::setDepthTest(ETestMethod testMethod)
+{
+  renderer->setDepthTest(testMethod);
+}
+
 template<class Renderer> bool cac::RenderEngine<Renderer>::loadFont(FontResource resource)
 {
     if(fontResources.count(resource.name) == 0)
