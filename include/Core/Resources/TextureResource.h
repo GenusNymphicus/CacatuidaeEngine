@@ -22,7 +22,7 @@ namespace cac
 	int width;  /*!< width of the texture */
 	int height; /*!< height of the texture */
 	bool hasAlpha; /*!< Tells the renderer if this texture uses 3 or 4 channels */
-	std::vector<char> data; /*!< texture data as binary */
+	std::vector<unsigned char> data; /*!< texture data as binary */
     };
 }
 #endif

@@ -39,7 +39,7 @@ namespace cac
 	unsigned int textureHeight; /*!< height of the font texture */
 	unsigned int textureWidth; /*!< width of the font texture */
 	std::map<char, GlyphInformation> glyphs; /*!< Contains the information for a single glyph, including their spartial position on the font texture */
-	std::vector<char> data;  /*!< font texture as binary data */
+	std::vector<unsigned char> data;  /*!< font texture as binary data */
     };
 }
 #endif

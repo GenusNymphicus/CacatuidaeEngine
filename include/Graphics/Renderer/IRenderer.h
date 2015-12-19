@@ -83,7 +83,7 @@ namespace cac
 	    * 
 	    * @return true for success or false if failed
 	    */
-	    virtual bool createTexture(std::string textureName, int width, int height, std::vector<char> data,  bool hasAlpha = false) = 0;
+	    virtual bool createTexture(std::string textureName, int width, int height, std::vector<unsigned char> data,  bool hasAlpha = false) = 0;
 	    
 	    /** Create a texturefrom the given parameters
 	    *  Generate the texture used for meshes or the font texture.
@@ -97,7 +97,7 @@ namespace cac
 	    * 
 	    * @return true for success or false if failed
 	    */
-	    virtual bool createTexture(std::string textureName, int width, int height, std::vector<char> data,  int numChannels) = 0;
+	    virtual bool createTexture(std::string textureName, int width, int height, std::vector<unsigned char> data,  int numChannels) = 0;
 	    
 	    /** Swap the backbuffer
 	    * Swaps the backbuffers of the render context to "update" the screen.

@@ -26,7 +26,7 @@ namespace cac
 	std::map<std::string, unsigned int> trackedSections;
 	std::map<std::string, std::vector<unsigned int>> sectionResults;
 	
-	int maxSampleSize;
+	unsigned int maxSampleSize;
     };
 }
 #endif

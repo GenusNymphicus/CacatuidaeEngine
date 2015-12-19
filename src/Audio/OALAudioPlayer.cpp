@@ -179,7 +179,9 @@ void cac::OALAudioPlayer::release()
 	alDeleteSources(1, &audioSource.first);
 	
     alcMakeContextCurrent(nullptr);
-  //  alcDestroyContext(context);
+  if(context)
+    alcDestroyContext(context);
+  if(audioDevice)
     alcCloseDevice(audioDevice);
 }
 

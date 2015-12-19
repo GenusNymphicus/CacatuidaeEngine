@@ -33,8 +33,8 @@ namespace cac
 
 	virtual bool createMesh(std::string name, std::vector<Vertex> vertices, std::vector<short> indices = std::vector<short>()) override;
 	virtual bool createShaderProgram(std::string programName, std::string vertexShader, std::string fragmentShader, std::string geometryShader ="") override; 
-	virtual bool createTexture(std::string textureName, int width, int height, std::vector<char> data,  bool hasAlpha = false) override;
-	virtual bool createTexture(std::string textureName, int width, int height, std::vector<char> data,  int numChannels) override;
+	virtual bool createTexture(std::string textureName, int width, int height, std::vector<unsigned char> data,  bool hasAlpha = false) override;
+	virtual bool createTexture(std::string textureName, int width, int height, std::vector<unsigned char> data,  int numChannels) override;
 	virtual void swapBuffers() override; 
 	virtual void setClearColor(float r, float g, float b) override;
 	virtual void clearBuffers() override;

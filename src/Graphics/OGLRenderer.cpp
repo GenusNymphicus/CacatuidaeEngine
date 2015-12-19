@@ -65,7 +65,7 @@ bool cac::OGLRenderer::initialize(WindowDesc windowDesc)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Accept fragment if it closer to the camera than the former one
-    glDepthFunc(GL_LESS);
+    glDepthFunc(GL_ALWAYS);
     
     return true;
 }
@@ -149,12 +149,12 @@ bool cac::OGLRenderer::createMesh(std::string name, std::vector<Vertex> vertices
     error = glGetError();
     return error == GL_NO_ERROR;
 }
-bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<char> data, bool hasAlpha)
+bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<unsigned char> data, bool hasAlpha)
 {
     return createTexture(textureName, width, height, data, (hasAlpha ? 4 : 3));
     
 }
-bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<char> data, int numChannels)
+bool cac::OGLRenderer::createTexture(std::string textureName, int width, int height,  std::vector<unsigned char> data, int numChannels)
  {
      if(textures[textureName].textureId != 0)
      {
@@ -287,8 +287,8 @@ void cac::OGLRenderer::render(const Renderable& renderable)
     glBindVertexArray(meshes[renderable.mesh].vao);
     
     glm::vec3 position(renderable.posX, renderable.posY, renderable.posZ);
-    glm::vec3 scale(renderable.scaleX, renderable.scaleY,renderable.scaleZ);	
-		    
+    glm::vec3 scale(renderable.scaleX, renderable.scaleY,renderable.scaleZ);
+    
     glm::mat4 mvp;
     mvp = glm::translate(mvp, position);
     mvp = glm::scale(mvp, scale);
@@ -308,6 +308,9 @@ void cac::OGLRenderer::render(const Renderable& renderable)
 
     glDrawArraysInstanced(GL_TRIANGLE_STRIP, 0, meshes[renderable.mesh].numberOfIndices, 1);
     error = glGetError();
+    if(error != GL_NO_ERROR)
+      std::cout<<"Render error!"<<std::endl;
+    
     glBindVertexArray(0);
 }
 

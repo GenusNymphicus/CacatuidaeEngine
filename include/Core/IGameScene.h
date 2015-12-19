@@ -14,6 +14,7 @@
 namespace cac
 {
     class GameEngine;
+    class Message;
     
     class IGameScene
     {
@@ -22,20 +23,11 @@ namespace cac
         virtual bool initialize() {return true;}
         virtual ~IGameScene() {}
 	virtual void event(std::string message){}
+	virtual void event(Message* message){}
         virtual void update(float dt) { }
 	virtual void refresh() { }
-	
-       // virtual void addSystem(ISystem* system);
-       // virtual void notifySystems(Message* message) { for(auto& system : systems) system->receiveMessage(message); }
-   /*     GameObject* getGameObject(unsigned int gameObjectId);
-        void removeGameObject(unsigned int gameObjectid);
-        void addGameObject(GameObject* gameObject);
-*/
-    protected:
- //       std::shared_ptr<GameObject> scene;
-  //      std::map<unsigned int, GameObject*> gameObjects;
 
-    //    std::vector<std::unique_ptr<ISystem>> systems;
+    protected:
 	GameEngine* engine;
 	RenderEngine<OGLRenderer>* renderer;
 	InputManager* input;
