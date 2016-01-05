@@ -5,6 +5,7 @@
 #include <map>
 #include "KeyState.h"
 #include "IInputDevice.h"
+#include <Core/Message.h>
 
 namespace cac
 {
@@ -20,7 +21,9 @@ namespace cac
 	//Key Actions
 	void bind(int key, KeyState keyState,std::string actionString, unsigned int context = 0);
 
+	void setKeyEventCallback(std::function<void(Message*)> keyEventCallback);
 
+	void updateKeyEvents();
     private:
 	struct KeyAction
 	{
@@ -41,6 +44,8 @@ namespace cac
 	cac::OGLWindow* window;
 	std::map<int, KeyState> lastKeyStates;
 	std::map<int, std::vector<KeyAction>> mappedKeys;
+	bool listenToKeyEvents = false;
+	std::function<void(Message*)> keyEventCallback = {};
     };
 }
 
